@@ -1,15 +1,15 @@
 trigger:
-  - main
+  - main  # Déclenche le pipeline lorsque des changements sont effectués sur la branche 'main'
 
 resources:
-  - repo: self
+  - repo: self  # Utilisation du même dépôt pour la pipeline
 
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'bfe00a36-b42a-4964-b339-6f4cef948c76'
   imageRepository: 'ksapplication'
   containerRegistry: 'myuniqueregistry.azurecr.io'
-  dockerfilePath: 'k8s-project/docker/Dockerfile'  # Mise à jour du chemin vers le Dockerfile
+  dockerfilePath: './Dockerfile'  # Mise à jour du chemin vers le Dockerfile à la racine du dépôt
   tag: '$(Build.BuildId)'
   imagePullSecret: 'myuniqueregistry11ea-auth'
 
@@ -33,7 +33,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)  # Utilisation du chemin mis à jour
+        dockerfile: $(dockerfilePath)  # Utilisation du chemin mis à jour pour le Dockerfile
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
