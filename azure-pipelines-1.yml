@@ -6,7 +6,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '356d6e30-3e7b-458c-af4d-25e5dcc05cd7'
+  dockerRegistryServiceConnection: 'bfe00a36-b42a-4964-b339-6f4cef948c76'
   imageRepository: 'k8simage'
   containerRegistry: 'myuniqueregistry.azurecr.io'
   dockerfilePath: 'docker/Dockerfile'  # Nouvelle référence vers le Dockerfile dans le dossier 'docker'
