@@ -1,4 +1,4 @@
-trigger:
+ttrigger:
   - main
 
 resources:
@@ -9,7 +9,7 @@ variables:
   dockerRegistryServiceConnection: 'bfe00a36-b42a-4964-b339-6f4cef948c76'
   imageRepository: 'k8simage'
   containerRegistry: 'myuniqueregistry.azurecr.io'
-  dockerfilePath: 'k8s-project/docker/Dockerfile'  # Met à jour le chemin vers ton Dockerfile
+  dockerfilePath: 'k8s-project/docker/Dockerfile'  # Chemin mis à jour vers le Dockerfile
   tag: '$(Build.BuildId)'
   imagePullSecret: 'myuniqueregistry11ea-auth'
 
@@ -48,7 +48,6 @@ stages:
   jobs:
   - deployment: Deploy
     condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
-
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
