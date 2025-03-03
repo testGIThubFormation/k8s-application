@@ -10,8 +10,8 @@ variables:
   imageRepository: 'ksapplication'
   containerRegistry: 'myuniqueregistry.azurecr.io'
   dockerfilePath: './Dockerfile'  # Mise à jour du chemin vers le Dockerfile à la racine du dépôt
-  tag: '$(Build.BuildId)'
-  imagePullSecret: 'myuniqueregistry11ea-auth'
+  tag: '$(Build.BuildId)'  # Utilisation de l'ID de build comme tag
+  imagePullSecret: 'myuniqueregistry11ea-auth'  # Nom du secret pour l'accès au registre
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -24,7 +24,7 @@ stages:
   displayName: Build stage
   jobs:
   - job: Build
-    displayName: Build
+    displayName: Build Docker Image
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -44,7 +44,6 @@ stages:
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
-
   jobs:
   - deployment: Deploy
     condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
