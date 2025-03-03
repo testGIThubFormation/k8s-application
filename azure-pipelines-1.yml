@@ -1,20 +1,15 @@
-# Deploy to Azure Kubernetes Service
-# Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
-- main
+  - main
 
 resources:
-- repo: self
+  - repo: self
 
 variables:
-
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'bfe00a36-b42a-4964-b339-6f4cef948c76'
+  dockerRegistryServiceConnection: '89231762-457f-4970-a6af-a51cceb77d60'
   imageRepository: 'k8simage'
   containerRegistry: 'myuniqueregistry.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: 'docker/Dockerfile'  # Nouvelle référence vers le Dockerfile dans le dossier 'docker'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'myuniqueregistry11ea-auth'
 
@@ -38,7 +33,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath)  # Utiliser le chemin mis à jour
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
