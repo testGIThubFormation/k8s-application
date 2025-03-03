@@ -1,4 +1,4 @@
-trigger:
+trigger: 
   - main
 
 resources:
@@ -33,7 +33,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)  # Utiliser le chemin mis à jour
+        dockerfile: $(dockerfilePath)  # Utiliser le chemin mis à jour vers 'docker/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
